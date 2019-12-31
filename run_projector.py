@@ -109,7 +109,7 @@ Run 'python %(prog)s <subcommand> --help' for subcommand help.''',
     project_generated_images_parser.add_argument('--network', help='Network pickle filename', dest='network_pkl', required=True)
     project_generated_images_parser.add_argument('--seeds', type=_parse_num_range, help='List of random seeds', default=range(3))
     project_generated_images_parser.add_argument('--num-snapshots', type=int, help='Number of snapshots (default: %(default)s)', default=5)
-    project_generated_images_parser.add_argument('--truncation-psi', type=float, help='Truncation psi (default: %(default)s)', default=1.0)
+    project_generated_images_parser.add_argument('--truncation-psi', type=float, help='Truncation psi (default: %(default)s)', default=2.0)
     project_generated_images_parser.add_argument('--result-dir', help='Root directory for run results (default: %(default)s)', default='results', metavar='DIR')
 
     project_real_images_parser = subparsers.add_parser('project-real-images', help='Project real images')
