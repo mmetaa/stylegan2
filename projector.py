@@ -17,11 +17,11 @@ class Projector:
     def __init__(self):
         self.num_steps                  = 1000
         self.dlatent_avg_samples        = 10000
-        self.initial_learning_rate      = 0.1
-        self.initial_noise_factor       = 0.05
-        self.lr_rampdown_length         = 0.25
-        self.lr_rampup_length           = 0.05
-        self.noise_ramp_length          = 0.75
+        self.initial_learning_rate      = 0.8
+        self.initial_noise_factor       = 0.50
+        self.lr_rampdown_length         = 0.50
+        self.lr_rampup_length           = 0.50
+        self.noise_ramp_length          = 1.00
         self.regularize_noise_weight    = 1e5
         self.verbose                    = False
         self.clone_net                  = True
@@ -65,7 +65,7 @@ class Projector:
         latent_samples = np.random.RandomState(123).randn(self.dlatent_avg_samples, *self._Gs.input_shapes[0][1:])
         dlatent_samples = self._Gs.components.mapping.run(latent_samples, None)[:, :1, :] # [N, 1, 512]
         self._dlatent_avg = np.mean(dlatent_samples, axis=0, keepdims=True) # [1, 1, 512]
-        self._dlatent_std = (np.sum((dlatent_samples - self._dlatent_avg) ** 2) / self.dlatent_avg_samples) ** 0.5
+        self._dlatent_std = (np.sum((dlatent_samples - self._dlatent_avg) ** 2) / self.dlatent_avg_samples) ** 0.9
         self._info('std = %g' % self._dlatent_std)
 
         # Find noise inputs.
